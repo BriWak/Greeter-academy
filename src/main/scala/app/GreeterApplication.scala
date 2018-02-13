@@ -57,5 +57,3 @@ final class CashISASavingsAccount(accountNumber: String,
     new CashISASavingsAccount(accountNumber, balance + amount)
   }
 }
-
-test
