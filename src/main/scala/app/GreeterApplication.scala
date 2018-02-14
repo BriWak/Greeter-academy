@@ -6,13 +6,18 @@ object Prompt {
   def ask(message : String) = StdIn.readLine(message)
 }
 
-class Person(name : String, age : Int) {
+class Person(name : String, age : Int, private val bankAccount: BankAccount) {
+  //Secondary Constructor
+  def this(name : String, age: Int) = this(name,  age, new SavingsAccount("12345",0.00))
+
   private val years : String = if(age > 1) "years" else "year"
+
   def speak() : String = {
-    if(name == "brian") {
+    if(name == "adam") {
       s"You don't get a hello!"
     }else {
-      s"Hello $name, you are $age $years old"
+      s"Hello $name, you are $age $years old \n " +
+        s"You have ${bankAccount.balance} in your account."
     }
   }
 }
@@ -25,7 +30,7 @@ object GreeterApplication extends App {
 }
 
 abstract class BankAccount(accountNumber : String,
-                           balance : Double){
+                           val balance : Double){
   def withdraw(amount : Double) : BankAccount
   def deposit(amount : Double) : BankAccount
 }
@@ -58,4 +63,3 @@ final class CashISASavingsAccount(accountNumber: String,
   }
 }
 
-test
