@@ -8,8 +8,20 @@ class Person(name : String, age : Int, val bankAccounts: Seq[BankAccount] = Nil)
 
   private val excluded = List("adam", "daniel")
 
-  def totalBalance =bankAccounts.map(_.balance).sum
+  //Anonymous Function
+  //an anonymous function is a function that has no name assigned
+  //Partial Function
+  //A partial function is applied to each element in a collection
+  val	add	=	(acc	:	Double,	account	:	BankAccount)	=>	acc	+	account.balance
+  bankAccounts.foldLeft(0.00)(add)
 
+  //calling	map()	on an Iterable collection will apply that function to each and every element in that list
+  //Underscore _ tells Scala that we want to apply the expression
+  //after the _ operator to every element in the collection
+  def totalBalance = bankAccounts.map(_.balance).sum
+
+  //Higher Order Function
+  //functions that take other functions as parameters, or whose result is a function
   def sumAndMultipleBy(f: Double => Double) = bankAccounts.map(x => f(x.balance)).sum
 
   def speak() : String = {
